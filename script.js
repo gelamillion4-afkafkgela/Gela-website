@@ -1,13 +1,22 @@
 
-// DAG ETHIOPIAN COFFEE SETTINGS
+// ==========================================
+// DAG ETHIOPIAN COFFEE
+// Complete Shopping Cart & WhatsApp Ordering
+// ==========================================
+
+// BUSINESS SETTINGS
 
 const BUSINESS = {
-  whatsapp: "2519XXXXXXXX",
+  name: "DAG ETHIOPIAN COFFEE",
+  whatsapp: "251924012897",
   email: "yourbusiness@email.com",
   currency: "ETB"
 };
 
-// EDIT THESE PRODUCTS AND PRICES
+// ==========================================
+// PRODUCTS
+// Edit product names, descriptions and prices
+// ==========================================
 
 const products = [
   {
@@ -50,73 +59,123 @@ const products = [
     name: "Ethiopian Coffee Beans",
     description: "Discover the heritage of Ethiopian coffee.",
     price: 1150,
-    image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1495474472287-4d71bc2085?auto=format&fit=crop&w=800&q=80"
   }
 ];
 
-// Shopping cart
+// ==========================================
+// SHOPPING CART
+// ==========================================
 
-let cart = JSON.parse(localStorage.getItem("dagCart") || "[]");
+let cart = [];
 
-function money(amount) {
-  return BUSINESS.currency + " " + amount.toLocaleString();
+try {
+  const savedCart = JSON.parse(
+    localStorage.getItem("dagCart") || "[]"
+  );
+
+  cart = Array.isArray(savedCart) ? savedCart : [];
+} catch (error) {
+  cart = [];
 }
 
-// Display products
+// ==========================================
+// PRICE FORMAT
+// ==========================================
+
+function money(amount) {
+  return BUSINESS.currency + " " +
+    Number(amount).toLocaleString();
+}
+
+// ==========================================
+// DISPLAY PRODUCTS
+// ==========================================
 
 function displayProducts() {
+
   const grid = document.getElementById("product-grid");
 
   grid.innerHTML = products.map(product => `
     <div class="product-card">
-      <img src="${product.image}"
-           alt="${product.name}"
-           loading="lazy">
+
+      <img
+        src="${product.image}"
+        alt="${product.name}"
+        loading="lazy"
+      >
 
       <div class="product-info">
+
         <h3>${product.name}</h3>
+
         <p>${product.description}</p>
-        <div class="price">${money(product.price)}</div>
-        <button class="primary-button"
-                onclick="addToCart(${product.id})">
+
+        <div class="price">
+          ${money(product.price)}
+        </div>
+
+        <button
+          class="primary-button"
+          onclick="addToCart(${product.id})"
+        >
           Add to Cart
         </button>
+
       </div>
     </div>
   `).join("");
 }
 
-// Add product
+// ==========================================
+// ADD PRODUCT TO CART
+// ==========================================
 
 function addToCart(id) {
+
   const product = products.find(p => p.id === id);
+
+  if (!product) return;
+
   const existing = cart.find(item => item.id === id);
 
   if (existing) {
+
     existing.quantity++;
+
   } else {
+
     cart.push({
       id: product.id,
       name: product.name,
       price: product.price,
       quantity: 1
     });
+
   }
 
   saveCart();
-  toggleCart(true);
+  toggleCart();
 }
 
-// Remove product
+// ==========================================
+// REMOVE PRODUCT
+// ==========================================
 
 function removeFromCart(id) {
+
   cart = cart.filter(item => item.id !== id);
+
   saveCart();
+
 }
 
-// Change quantity
+// ==========================================
+// CHANGE PRODUCT QUANTITY
+// ==========================================
 
 function changeQuantity(id, amount) {
+
   const item = cart.find(item => item.id === id);
 
   if (!item) return;
@@ -124,114 +183,190 @@ function changeQuantity(id, amount) {
   item.quantity += amount;
 
   if (item.quantity <= 0) {
+
     removeFromCart(id);
+
   } else {
+
     saveCart();
+
   }
+
 }
 
-// Save cart
+// ==========================================
+// SAVE CART
+// ==========================================
 
 function saveCart() {
-  localStorage.setItem("dagCart", JSON.stringify(cart));
+
+  localStorage.setItem(
+    "dagCart",
+    JSON.stringify(cart)
+  );
+
   renderCart();
+
 }
 
-// Display cart
+// ==========================================
+// DISPLAY SHOPPING CART
+// ==========================================
 
 function renderCart() {
+
   const container = document.getElementById("cart-items");
 
   const count = cart.reduce(
-    (total, item) => total + item.quantity, 0
+    (total, item) => total + item.quantity,
+    0
   );
 
   const total = cart.reduce(
-    (sum, item) => sum + item.price * item.quantity, 0
+    (sum, item) => sum + item.price * item.quantity,
+    0
   );
 
   document.getElementById("cart-count").textContent = count;
-  document.getElementById("cart-total").textContent = money(total);
+
+  document.getElementById("cart-total").textContent =
+    money(total);
 
   if (cart.length === 0) {
-    container.innerHTML = "<p>Your cart is empty.</p>";
+
+    container.innerHTML =
+      "<p>Your shopping cart is empty.</p>";
+
     return;
+
   }
 
   container.innerHTML = cart.map(item => `
+
     <div class="cart-item">
+
       <div>
+
         <strong>${item.name}</strong>
-        <p>${money(item.price)} × ${item.quantity}</p>
-        <p>${money(item.price * item.quantity)}</p>
+
+        <p>
+          ${money(item.price)} × ${item.quantity}
+        </p>
+
+        <p>
+          Subtotal: ${money(item.price * item.quantity)}
+        </p>
+
       </div>
 
       <div>
-        <button onclick="changeQuantity(${item.id}, 1)">+</button>
-        <button onclick="changeQuantity(${item.id}, -1)">−</button>
-        <button onclick="removeFromCart(${item.id})">Remove</button>
+
+        <button onclick="changeQuantity(${item.id}, 1)">
+          +
+        </button>
+
+        <button onclick="changeQuantity(${item.id}, -1)">
+          −
+        </button>
+
+        <button onclick="removeFromCart(${item.id})">
+          Remove
+        </button>
+
       </div>
+
     </div>
+
   `).join("");
+
 }
 
-// Open and close cart
+// ==========================================
+// OPEN SHOPPING CART
+// ==========================================
 
-function toggleCart(forceOpen = false) {
+function toggleCart() {
+
   document.getElementById("cart-panel")
     .classList.add("active");
 
   document.getElementById("cart-overlay")
     .classList.add("active");
+
 }
+
+// ==========================================
+// CLOSE SHOPPING CART
+// ==========================================
 
 function closeCart() {
+
   document.getElementById("cart-panel")
     .classList.remove("active");
 
   document.getElementById("cart-overlay")
     .classList.remove("active");
+
 }
 
-// WhatsApp checkout
+// ==========================================
+// WHATSAPP CHECKOUT
+// ==========================================
 
 function checkout() {
-  if (cart.length === 0) {
-    alert("Your shopping cart is empty!");
-    return;
-  }
 
-  if (BUSINESS.whatsapp.includes("X")) {
-    alert("Please configure your WhatsApp number in script.js first.");
+  if (cart.length === 0) {
+
+    alert("Your shopping cart is empty!");
+
     return;
+
   }
 
   const total = cart.reduce(
-    (sum, item) => sum + item.price * item.quantity, 0
+    (sum, item) => sum + item.price * item.quantity,
+    0
   );
 
-  let message = "Hello DAG Ethiopian Coffee!\n\n";
-  message += "I would like to order:\n\n";
+  let message =
+    "Hello DAG Ethiopian Coffee!\n\n";
+
+  message += "I would like to place an order:\n\n";
 
   cart.forEach(item => {
-    message += `${item.name}\n`;
-    message += `Quantity: ${item.quantity}\n`;
-    message += `Subtotal: ${money(item.price * item.quantity)}\n\n`;
+
+    message +=
+      "Product: " + item.name + "\n";
+
+    message +=
+      "Quantity: " + item.quantity + "\n";
+
+    message +=
+      "Price: " +
+      money(item.price * item.quantity) +
+      "\n\n";
+
   });
 
-  message += `Total: ${money(total)}\n\n`;
-  message += "Please provide ordering and delivery information.";
+  message +=
+    "TOTAL: " + money(total) + "\n\n";
 
-  const url =
+  message +=
+    "Please confirm product availability, delivery cost and payment details.";
+
+  const whatsappURL =
     "https://wa.me/" +
     BUSINESS.whatsapp +
     "?text=" +
     encodeURIComponent(message);
 
-  window.open(url, "_blank");
+  window.open(whatsappURL, "_blank");
+
 }
 
-// Business contact information
+// ==========================================
+// CONTACT INFORMATION
+// ==========================================
 
 document.getElementById("contact-whatsapp").href =
   "https://wa.me/" + BUSINESS.whatsapp;
@@ -242,12 +377,21 @@ document.getElementById("contact-email").href =
 document.getElementById("contact-email").textContent =
   BUSINESS.email;
 
-// Current year
+// ==========================================
+// FOOTER YEAR
+// ==========================================
 
 document.getElementById("year").textContent =
   new Date().getFullYear();
 
-// Initialize website
+// ==========================================
+// START WEBSITE
+// ==========================================
 
 displayProducts();
+
 renderCart();
+
+console.log(
+  "DAG ETHIOPIAN COFFEE website is ready!"
+);
