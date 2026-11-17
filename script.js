@@ -1,397 +1,431 @@
 
-// ==========================================
-// DAG ETHIOPIAN COFFEE
-// Complete Shopping Cart & WhatsApp Ordering
-// ==========================================
+/* =================================
+   DAG ETHIOPIAN COFFEE
+   WEBSITE DESIGN
+================================= */
 
-// BUSINESS SETTINGS
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-const BUSINESS = {
-  name: "DAG ETHIOPIAN COFFEE",
-  whatsapp: "251924012897",
-  email: "yourbusiness@email.com",
-  currency: "ETB"
-};
+html {
+  scroll-behavior: smooth;
+}
 
-// ==========================================
-// PRODUCTS
-// Edit product names, descriptions and prices
-// ==========================================
+body {
+  font-family: Arial, sans-serif;
+  color: #30251c;
+  background: #fffaf3;
+  line-height: 1.6;
+}
 
-const products = [
-  {
-    id: 1,
-    name: "Yirgacheffe Coffee",
-    description: "Floral aroma with bright citrus notes.",
-    price: 1200,
-    image: "https://images.unsplash.com/photo-1559525839-b184a4d698c7?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: 2,
-    name: "Sidama Coffee",
-    description: "Rich flavor with fruity characteristics.",
-    price: 1100,
-    image: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: 3,
-    name: "Guji Coffee",
-    description: "Distinctive aroma and complex flavor.",
-    price: 1300,
-    image: "https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: 4,
-    name: "Limu Coffee",
-    description: "Balanced taste and pleasant aroma.",
-    price: 1000,
-    image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: 5,
-    name: "Jimma Coffee",
-    description: "Traditional Ethiopian coffee character.",
-    price: 950,
-    image: "https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: 6,
-    name: "Ethiopian Coffee Beans",
-    description: "Discover the heritage of Ethiopian coffee.",
-    price: 1150,
-    image: "https://images.unsplash.com/photo-1495474472287-4d71bc2085?auto=format&fit=crop&w=800&q=80"
+/* HEADER */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 20px 7%;
+  background: #21180f;
+  color: white;
+}
+
+.logo {
+  color: #e9b76b;
+  font-size: 25px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.logo span {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 3px;
+}
+
+nav {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+nav a:hover {
+  color: #e9b76b;
+}
+
+.cart-button {
+  padding: 10px 16px;
+  border: 1px solid #e9b76b;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* BUTTONS */
+
+.primary-button {
+  display: inline-block;
+  padding: 13px 25px;
+  border: none;
+  border-radius: 4px;
+  background: #9b5d27;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.primary-button:hover {
+  background: #75421c;
+  transform: translateY(-2px);
+}
+
+/* HERO */
+
+.hero {
+  min-height: 570px;
+  display: flex;
+  align-items: center;
+  padding: 70px 9%;
+  color: white;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(20,13,8,.9),
+      rgba(20,13,8,.25)
+    ),
+    url("https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1800&q=85")
+    center/cover;
+}
+
+.hero-content {
+  max-width: 650px;
+}
+
+.eyebrow {
+  color: #b87935;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  margin-bottom: 15px;
+}
+
+.hero h1 {
+  font-size: clamp(40px, 6vw, 68px);
+  line-height: 1.1;
+  margin-bottom: 22px;
+}
+
+.hero h1 span {
+  color: #e9b76b;
+}
+
+.hero-content p:not(.eyebrow) {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+/* INTRODUCTION */
+
+.intro {
+  text-align: center;
+  padding: 85px 10%;
+}
+
+.intro h2,
+.products h2,
+.origins h2,
+.wholesale h2,
+.contact h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.intro > p:last-child {
+  max-width: 800px;
+  margin: auto;
+  color: #66584b;
+}
+
+/* COFFEE ORIGINS */
+
+.origins {
+  padding: 75px 7%;
+  text-align: center;
+  background: #f4eadb;
+}
+
+.origin-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 35px;
+}
+
+.origin-card {
+  background: white;
+  padding: 35px 20px;
+  border-radius: 8px;
+  box-shadow: 0 5px 18px #00000010;
+}
+
+.origin-card h3 {
+  color: #9b5d27;
+  margin-bottom: 12px;
+}
+
+.origin-card p {
+  color: #66584b;
+  font-size: 14px;
+}
+
+/* PRODUCTS */
+
+.products {
+  padding: 80px 7%;
+  text-align: center;
+  background: #fffaf3;
+}
+
+.section-description {
+  color: #76685c;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  margin-top: 35px;
+  text-align: left;
+}
+
+.product-card {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 5px 18px #00000012;
+  transition: .3s;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-card img {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+}
+
+.product-info {
+  padding: 22px;
+}
+
+.product-info h3 {
+  font-size: 21px;
+  margin-bottom: 8px;
+}
+
+.product-info p {
+  color: #76685c;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.price {
+  color: #9b5d27;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.product-info button {
+  width: 100%;
+}
+
+/* WHOLESALE */
+
+.wholesale {
+  padding: 90px 10%;
+  background: #2c2117;
+  color: white;
+  text-align: center;
+}
+
+.wholesale p:not(.eyebrow) {
+  max-width: 700px;
+  margin: 0 auto 25px;
+}
+
+/* CONTACT */
+
+.contact {
+  text-align: center;
+  padding: 85px 10%;
+}
+
+.contact p {
+  margin-bottom: 18px;
+}
+
+.contact-detail {
+  color: #66584b;
+}
+
+.contact-detail a {
+  color: #9b5d27;
+}
+
+/* FOOTER */
+
+footer {
+  text-align: center;
+  padding: 35px;
+  background: #21180f;
+  color: white;
+}
+
+footer h2 {
+  color: #e9b76b;
+  margin-bottom: 8px;
+}
+
+footer p {
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+/* SHOPPING CART */
+
+.cart-overlay {
+  position: fixed;
+  inset: 0;
+  background: #0009;
+  z-index: 9;
+  display: none;
+}
+
+.cart-overlay.active {
+  display: block;
+}
+
+.cart-panel {
+  position: fixed;
+  z-index: 10;
+  right: -450px;
+  top: 0;
+  height: 100%;
+  width: min(420px, 100%);
+  background: white;
+  padding: 25px;
+  transition: right .3s ease;
+  overflow-y: auto;
+}
+
+.cart-panel.active {
+  right: 0;
+}
+
+.cart-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 15px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.cart-item p {
+  font-size: 13px;
+  color: #66584b;
+}
+
+.cart-item button {
+  padding: 5px 8px;
+  margin: 2px;
+  cursor: pointer;
+}
+
+.cart-total {
+  margin-top: 25px;
+}
+
+.checkout-button {
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* MOBILE RESPONSIVE DESIGN */
+
+@media(max-width: 900px) {
+
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
-];
 
-// ==========================================
-// SHOPPING CART
-// ==========================================
-
-let cart = [];
-
-try {
-  const savedCart = JSON.parse(
-    localStorage.getItem("dagCart") || "[]"
-  );
-
-  cart = Array.isArray(savedCart) ? savedCart : [];
-} catch (error) {
-  cart = [];
-}
-
-// ==========================================
-// PRICE FORMAT
-// ==========================================
-
-function money(amount) {
-  return BUSINESS.currency + " " +
-    Number(amount).toLocaleString();
-}
-
-// ==========================================
-// DISPLAY PRODUCTS
-// ==========================================
-
-function displayProducts() {
-
-  const grid = document.getElementById("product-grid");
-
-  grid.innerHTML = products.map(product => `
-    <div class="product-card">
-
-      <img
-        src="${product.image}"
-        alt="${product.name}"
-        loading="lazy"
-      >
-
-      <div class="product-info">
-
-        <h3>${product.name}</h3>
-
-        <p>${product.description}</p>
-
-        <div class="price">
-          ${money(product.price)}
-        </div>
-
-        <button
-          class="primary-button"
-          onclick="addToCart(${product.id})"
-        >
-          Add to Cart
-        </button>
-
-      </div>
-    </div>
-  `).join("");
-}
-
-// ==========================================
-// ADD PRODUCT TO CART
-// ==========================================
-
-function addToCart(id) {
-
-  const product = products.find(p => p.id === id);
-
-  if (!product) return;
-
-  const existing = cart.find(item => item.id === id);
-
-  if (existing) {
-
-    existing.quantity++;
-
-  } else {
-
-    cart.push({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      quantity: 1
-    });
-
-  }
-
-  saveCart();
-  toggleCart();
-}
-
-// ==========================================
-// REMOVE PRODUCT
-// ==========================================
-
-function removeFromCart(id) {
-
-  cart = cart.filter(item => item.id !== id);
-
-  saveCart();
-
-}
-
-// ==========================================
-// CHANGE PRODUCT QUANTITY
-// ==========================================
-
-function changeQuantity(id, amount) {
-
-  const item = cart.find(item => item.id === id);
-
-  if (!item) return;
-
-  item.quantity += amount;
-
-  if (item.quantity <= 0) {
-
-    removeFromCart(id);
-
-  } else {
-
-    saveCart();
-
+  .origin-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
 }
 
-// ==========================================
-// SAVE CART
-// ==========================================
+@media(max-width: 600px) {
 
-function saveCart() {
-
-  localStorage.setItem(
-    "dagCart",
-    JSON.stringify(cart)
-  );
-
-  renderCart();
-
-}
-
-// ==========================================
-// DISPLAY SHOPPING CART
-// ==========================================
-
-function renderCart() {
-
-  const container = document.getElementById("cart-items");
-
-  const count = cart.reduce(
-    (total, item) => total + item.quantity,
-    0
-  );
-
-  const total = cart.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0
-  );
-
-  document.getElementById("cart-count").textContent = count;
-
-  document.getElementById("cart-total").textContent =
-    money(total);
-
-  if (cart.length === 0) {
-
-    container.innerHTML =
-      "<p>Your shopping cart is empty.</p>";
-
-    return;
-
+  .header {
+    padding: 17px 5%;
   }
 
-  container.innerHTML = cart.map(item => `
-
-    <div class="cart-item">
-
-      <div>
-
-        <strong>${item.name}</strong>
-
-        <p>
-          ${money(item.price)} × ${item.quantity}
-        </p>
-
-        <p>
-          Subtotal: ${money(item.price * item.quantity)}
-        </p>
-
-      </div>
-
-      <div>
-
-        <button onclick="changeQuantity(${item.id}, 1)">
-          +
-        </button>
-
-        <button onclick="changeQuantity(${item.id}, -1)">
-          −
-        </button>
-
-        <button onclick="removeFromCart(${item.id})">
-          Remove
-        </button>
-
-      </div>
-
-    </div>
-
-  `).join("");
-
-}
-
-// ==========================================
-// OPEN SHOPPING CART
-// ==========================================
-
-function toggleCart() {
-
-  document.getElementById("cart-panel")
-    .classList.add("active");
-
-  document.getElementById("cart-overlay")
-    .classList.add("active");
-
-}
-
-// ==========================================
-// CLOSE SHOPPING CART
-// ==========================================
-
-function closeCart() {
-
-  document.getElementById("cart-panel")
-    .classList.remove("active");
-
-  document.getElementById("cart-overlay")
-    .classList.remove("active");
-
-}
-
-// ==========================================
-// WHATSAPP CHECKOUT
-// ==========================================
-
-function checkout() {
-
-  if (cart.length === 0) {
-
-    alert("Your shopping cart is empty!");
-
-    return;
-
+  nav {
+    width: 100%;
+    order: 3;
+    gap: 13px;
   }
 
-  const total = cart.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0
-  );
+  .hero {
+    min-height: 480px;
+    padding: 50px 7%;
+  }
 
-  let message =
-    "Hello DAG Ethiopian Coffee!\n\n";
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
 
-  message += "I would like to place an order:\n\n";
+  .origin-grid {
+    grid-template-columns: 1fr;
+  }
 
-  cart.forEach(item => {
-
-    message +=
-      "Product: " + item.name + "\n";
-
-    message +=
-      "Quantity: " + item.quantity + "\n";
-
-    message +=
-      "Price: " +
-      money(item.price * item.quantity) +
-      "\n\n";
-
-  });
-
-  message +=
-    "TOTAL: " + money(total) + "\n\n";
-
-  message +=
-    "Please confirm product availability, delivery cost and payment details.";
-
-  const whatsappURL =
-    "https://wa.me/" +
-    BUSINESS.whatsapp +
-    "?text=" +
-    encodeURIComponent(message);
-
-  window.open(whatsappURL, "_blank");
+  .intro h2,
+  .products h2,
+  .origins h2,
+  .wholesale h2,
+  .contact h2 {
+    font-size: 28px;
+  }
 
 }
-
-// ==========================================
-// CONTACT INFORMATION
-// ==========================================
-
-document.getElementById("contact-whatsapp").href =
-  "https://wa.me/" + BUSINESS.whatsapp;
-
-document.getElementById("contact-email").href =
-  "mailto:" + BUSINESS.email;
-
-document.getElementById("contact-email").textContent =
-  BUSINESS.email;
-
-// ==========================================
-// FOOTER YEAR
-// ==========================================
-
-document.getElementById("year").textContent =
-  new Date().getFullYear();
-
-// ==========================================
-// START WEBSITE
-// ==========================================
-
-displayProducts();
-
-renderCart();
-
-console.log(
-  "DAG ETHIOPIAN COFFEE website is ready!"
-);
